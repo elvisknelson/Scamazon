@@ -48,9 +48,9 @@ ActiveRecord::Schema.define(version: 2020_11_04_223028) do
     t.string "name"
     t.integer "price"
     t.integer "quantity"
-    t.integer "category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "category_id"
   end
 
 end
