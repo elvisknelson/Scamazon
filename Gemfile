@@ -34,6 +34,9 @@ gem 'bootstrap'
 #Active Admin
 gem 'activeadmin'
 
+#Faker
+gem 'faker'
+
 #Authentication
 gem 'devise'
 
