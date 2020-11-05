@@ -37,6 +37,9 @@ gem 'simple_form'
 #Active Admin
 gem 'activeadmin'
 
+#Font Awesome
+gem 'font-awesome-rails'
+
 #Faker
 gem 'faker'
 
