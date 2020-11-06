@@ -31,9 +31,6 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # Bootstrap
 gem 'bootstrap'
 
-# Simple Form
-gem 'simple_form'
-
 #Active Admin
 gem 'activeadmin'
 
