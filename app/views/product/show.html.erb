@@ -1,2 +1,12 @@
-<h1>Product#show</h1>
-<p>Find me in app/views/product/show.html.erb</p>
+<div class="row justify-content-center mt-3">
+  <div class="col-8">
+    <div class="card text-white bg-dark">
+      <h1 class="card-header text-white">Name: <%= @product.name %></h1>
+      <div class="card-body">
+        <p class="card-text"><strong>Description:</strong> <%= @product.description %></p>
+        <p class="card-text"><strong>Pice:</strong> <%= number_to_currency(@product.price / 100.0) %></p>
+        <p class="card-text"><strong>Quantity:</strong> <%= @product.quantity %></p>
+      </div>
+    </div>
+  </div>
+</div>

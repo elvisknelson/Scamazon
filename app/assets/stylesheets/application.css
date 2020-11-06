@@ -13,3 +13,21 @@
  *= require_tree .
  *= require_self
  */
+ @import "bootstrap";
+ @import "font-awesome";
+
+ body {
+   background-color: #e4ebe8;
+ }
+
+.linethrough {
+   text-decoration: line-through;
+}
+
+.search_name {
+   width: 1100px;
+}
+
+#search_name {
+  width: inherit;
+}

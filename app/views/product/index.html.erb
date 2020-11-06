@@ -1,12 +1,18 @@
-<h1 class="mb-5 row mr-0 ml-0 justify-content-center">Characters</h1>
-<div class="row mr-0 ml-0 justify-content-center">
-  <div class="col-8">
-      <% @categories.each do |category| %>
-        <p>-<%= category.name %></p>
-
-        <% @products.where(category_id: category.id).each do |product| %>
-          <p>---<%= product.name %></p>
-        <% end %>
+<div>
+  <% @categories.each do |category| %>
+    <div class="">
+      <h1><%= category.name %></h1>
+    </div>
+    <div class="card-group">
+      <% @products.where(category_id: category.id).each do |product| %>
+        <div class="col-sm-3">
+          <div class="card mb-4 bg-light">
+            <%= image_tag(product.image, height: '250', class: 'card-img') %>
+            <h5 class="card-text pl-2 text-black"><%= number_to_currency((product.price / 100.0)) %></h5>
+            <h6 class="card-text pl-2 linethrough stext-black"><%= number_to_currency((product.price / 100.0) * rand(2..3)) %></h6>
+          </div>
+        </div>
       <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>
