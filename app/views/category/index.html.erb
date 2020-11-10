@@ -1,2 +1,11 @@
-<h1>Category#index</h1>
-<p>Find me in app/views/category/index.html.erb</p>
+<div>
+  <% @categories.each do |category| %>
+    <div class="card-group">
+      <div class="col-sm-3">
+        <div class="card mb-4 bg-light">
+         <p><%= link_to category.name, category_path(category) %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

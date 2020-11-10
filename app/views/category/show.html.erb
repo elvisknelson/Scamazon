@@ -1,2 +1,19 @@
-<h1>Category#show</h1>
-<p>Find me in app/views/category/show.html.erb</p>
+<div>
+  <div class="">
+    <h1><%= @category.name %></h1>
+  </div>
+  <div class="card-group">
+    <% @products.each do |product| %>
+      <div class="col-sm-3">
+        <div class="card mb-4 bg-light">
+          <div class="img-overlay">
+            <%= image_tag('discount.png') %>
+          </div>
+          <%= link_to image_tag(product.image, height: '250', class: 'card-img'), product_path(product) %>
+          <h5 class="card-text pl-2 text-black"><%= number_to_currency((product.price / 100.0)) %></h5>
+          <h6 class="card-text pl-2 linethrough stext-black"><%= number_to_currency((product.price / 100.0) / 0.20) %></h6>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -24,10 +24,21 @@
    text-decoration: line-through;
 }
 
-.search_name {
-   width: 1100px;
+.img-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: absolute;
+}
+.img-overlay img {
+  width: 100px;
 }
 
-#search_name {
-  width: inherit;
+form {
+  display: flex;
+}
+
+form .search-button {
+  border-radius: 0 !important;
 }
