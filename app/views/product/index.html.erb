@@ -1,14 +1,4 @@
 <div>
-
-  <details>
-    <summary>Shopping Cart</summary>
-      <ul>
-        <% @cart.each do |product| %>
-          <li><%= product.name %> - <%= link_to 'remove from cart', remove_from_cart_url(product), method: :delete %></li>
-        <% end %>
-      </ul>
-  </details>
-
   <% @categories.each do |category| %>
     <div class="">
       <h1><%= link_to category.name, category_path(category) %></h1>
@@ -24,9 +14,9 @@
             <h5 class="card-text pl-2 text-black"><%= number_to_currency((product.price / 100.0)) %></h5>
             <h6 class="card-text pl-2 linethrough stext-black"><%= number_to_currency((product.price / 100.0) / 0.20) %></h6>
             <% if @cart.include?(product) %>
-              <p><%= button_to 'remove from cart', remove_from_cart_url(product), method: :delete %></p>
+              <p class="card-text pl-2 text-black"><%= button_to 'remove from cart', remove_from_cart_url(product), method: :delete %></p>
             <% else %>
-              <p><%= link_to 'add to cart', add_to_cart_url(product.id), method: :post %></p>
+              <p class="card-text pl-2 text-black"><%= link_to 'add to cart', add_to_cart_url(product.id), method: :post %></p>
             <% end %>
           </div>
         </div>
