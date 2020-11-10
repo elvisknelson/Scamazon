@@ -1,14 +1,14 @@
 # AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 
-Category.destroy_all
 Product.destroy_all
+Category.destroy_all
 
-for i in 0..4
-  cat = Category.create(name: Faker::Name.unique.name)
-  puts cat.name
+for i in 0..10
+  cat = Category.create(name: Faker::Commerce.unique.department(max: 2, fixed_amount: true))
 
-  for i in 0..2
-    tes = Product.create(name: Faker::Food.unique.dish, category_id: cat.id)
-    puts "  -#{tes.name}"
+  for i in 0..10
+    name = Faker::Commerce.unique.product_name
+    tes = Product.create(name: name, description: Faker::Company.bs, category_id: cat.id, price: Faker::Number.within(range: 1500..20000),
+                         image: "https://source.unsplash.com/random/800x600/?#{name.split(" ")[2]}", quantity: Faker::Number.within(range: 0..75))
   end
 end
