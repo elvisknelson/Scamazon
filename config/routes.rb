@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'cart/index'
   get 'search/index'
 
   post 'product/add_to_cart/:id', to: 'product#add_to_cart', as: 'add_to_cart'
