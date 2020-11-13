@@ -1,2 +1,10 @@
-<h1>Cart#index</h1>
-<p>Find me in app/views/cart/index.html.erb</p>
+<summary>Shopping Cart</summary>
+<ul>
+  <% @cart.each do |product| %>
+    <li>Quantity x <%= product.name %> - <%= number_to_currency((product.price / 100.0)) %> - <%= link_to 'remove from cart', remove_from_cart_url(product), method: :delete %></li>
+  <% end %>
+</ul>
+
+<% unless @cart.empty? %>
+  <%= button_to 'Buy', checkout_create_path, method: :post, remote: true %>
+<% end %>
