@@ -35,6 +35,21 @@
   width: 100px;
 }
 
+.sidebar-cart {
+  width: 300px;
+  min-height: 500px;
+  float: right;
+  background-color: #e4ebe8;
+  margin-top: 57px;
+  border: 1px solid;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+}
+
+.sidebar-cart h3 {
+  text-align: center;
+  text-decoration: underline;
+}
 form {
   display: flex;
 }

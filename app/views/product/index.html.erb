@@ -14,9 +14,10 @@
             <h5 class="card-text pl-2 text-black"><%= number_to_currency((product.price / 100.0)) %></h5>
             <h6 class="card-text pl-2 linethrough stext-black"><%= number_to_currency((product.price / 100.0) / 0.20) %></h6>
             <% if @cart.include?(product) %>
-              <p class="card-text pl-2 text-black"><%= button_to 'remove from cart', remove_from_cart_url(product), method: :delete %></p>
+              <p class="card-text pl-2 text-black"><%= link_to 'remove from cart', remove_from_cart_url(product), method: :delete %></p>
             <% else %>
               <p class="card-text pl-2 text-black"><%= link_to 'add to cart', add_to_cart_url(product.id), method: :post %></p>
+              <%= button_to 'buy now', checkout_create_path, method: :post, params: { id: product.id }, remote: true %>
             <% end %>
           </div>
         </div>
