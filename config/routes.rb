@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'search/index'
 
   post 'product/add_to_cart/:id', to: 'product#add_to_cart', as: 'add_to_cart'
+  post 'product/update_cart/:id', to: 'product#update_cart', as: 'update_cart'
   delete 'product/remove_from_cart/:id', to: 'product#remove_from_cart', as: 'remove_from_cart'
 
   get 'category/index'
