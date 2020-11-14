@@ -12,13 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2020_11_14_011847) do
 
-  create_table "about_us", force: :cascade do |t|
-    t.string "header"
-    t.string "content"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
