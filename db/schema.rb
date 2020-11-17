@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_14_195126) do
+ActiveRecord::Schema.define(version: 2020_11_17_001651) do
 
   create_table "about_us", force: :cascade do |t|
     t.string "header"
@@ -84,6 +84,8 @@ ActiveRecord::Schema.define(version: 2020_11_14_195126) do
     t.decimal "gst_paid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "status"
+    t.decimal "hst_paid"
   end
 
   create_table "product_orders", force: :cascade do |t|
@@ -103,6 +105,8 @@ ActiveRecord::Schema.define(version: 2020_11_14_195126) do
     t.integer "category_id"
     t.string "description"
     t.string "image"
+    t.boolean "on_sale"
+    t.float "rating"
   end
 
   create_table "provinces", force: :cascade do |t|
