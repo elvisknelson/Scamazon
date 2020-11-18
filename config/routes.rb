@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   post 'sign_up', to: 'account#sign_up', as: 'account_sign_up'
   post 'sign_in', to: 'account#sign_in', as: 'account_sign_in'
   get 'sign_in', to: 'account#sign_in'
-  get 'sign_out', to: 'account#sign_out', as: 'account_sign_out'
+  resource 'sign_out', to: 'account#sign_out', as: 'account_sign_out'
 
   root to: 'product#index'
   get 'sale', to: 'product#sale', as: 'product_sale'
