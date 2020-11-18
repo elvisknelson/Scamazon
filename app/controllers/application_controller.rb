@@ -3,26 +3,41 @@ class ApplicationController < ActionController::Base
   before_action :load_cart
 
   def add_to_cart
-    id = params[:id].to_i
+    if session[:user]
+      id = params[:id].to_i
+      order_id = @current_order["id"].to_i
 
-    session[:cart] << id unless session[:cart].include?(id)
-    redirect_to root_path
+      @test = Order.find(order_id)
+
+      redirect_to root_path
+    end
+  end
+
+  def update_cart
+
   end
 
   def remove_from_cart
-    id = params[:id].to_i
 
-    session[:cart].delete(id)
-    redirect_to root_path
   end
 
   private
 
   def load_cart
-    @cart = Product.find(session[:cart])
+    if session[:user]
+      order = Order.where(user_id: session[:user], status: "pending").first
+      @current_orders = ProductOrder.where(order_id: order["id"])
+    end
   end
 
   def initialize_session
-    session[:cart] ||= []
+    @current_orders ||= []
+    session[:user] ||= nil
+
+    if Order.where(user_id: session[:user], status: "pending").empty?
+      @current_order = Order.create(user_id: session[:user], status: "pending")
+    else
+      @current_order = Order.where(user_id: session[:user], status: "pending").first
+    end
   end
 end

@@ -13,12 +13,20 @@
  *= require_tree .
  *= require_self
  */
- @import "bootstrap";
- @import "font-awesome";
+@import "bootstrap";
+@import "font-awesome";
 
- body {
-   background-color: #e4ebe8;
- }
+body {
+  background-color: #e4ebe8;
+}
+
+nav.navbar {
+  background-color: #111;
+}
+
+nav.navbar div ul li a {
+  color: white;
+}
 
 .linethrough {
    text-decoration: line-through;
@@ -32,7 +40,43 @@
   position: absolute;
 }
 .img-overlay img {
-  width: 100px;
+  width: 5rem;
+}
+
+.searchbar {
+}
+
+.mininav {
+  width: 100%;
+  background-color: #232f3e;
+}
+
+.mininav ul {
+  margin-bottom: 0;
+}
+
+.rating {
+  display: inline;
+  padding-left: 0.5rem;
+}
+
+.star-img {
+  width: 15px;
+}
+
+.mininav ul {
+  display: flex;
+}
+
+.mininav ul li {
+  list-style-type: none;
+  margin-right: 15px;
+}
+
+.mininav ul li a {
+  padding: 0;
+  color: white;
+  text-decoration: none;
 }
 
 .sidebar-cart {

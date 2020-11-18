@@ -1,7 +1,19 @@
 <div class="mininav">
   <ul>
     <li>
-      <%= link_to 'On Sale', root_path %>  <span class="sr-only">(current)</span>
+      <%= link_to 'On Sale', product_sale_path, action: "sale" %>
+    </li>
+    <li>
+      <%= link_to 'New Products', product_new_path, action: "new" %>
+    </li>
+    <li>
+      <%= link_to '3 Stars', product_rating_url(:rating => 3), action: "rating" %>
+    </li>
+     <li>
+      <%= link_to '4 Stars', product_rating_url(:rating => 4), action: "rating" %>
+    </li>
+     <li>
+      <%= link_to '5 Stars', product_rating_url(:rating => 5), action: "rating" %>
     </li>
   </ul>
 </div>

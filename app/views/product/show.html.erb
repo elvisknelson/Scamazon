@@ -1,5 +1,5 @@
-<div class="row justify-content-center mt-3">
-  <div class="col-8">
+<div class="justify-content-center mt-3">
+  <div class="col-8 m-auto">
     <div class="card text-white bg-dark">
       <h1 class="card-header text-white">Name: <%= @product.name %></h1>
       <div class="card-body">
@@ -7,6 +7,12 @@
         <p class="card-text"><strong>Description:</strong> <%= @product.description %></p>
         <p class="card-text"><strong>Pice:</strong> <%= number_to_currency(@product.price / 100.0) %></p>
         <p class="card-text"><strong>Quantity:</strong> <%= @product.quantity %></p>
+        <% if @current_orders.include?(@product) %>
+          <p class="card-text text-black"><%= link_to 'Remove from Cart', remove_from_cart_url(@product), method: :delete %></p>
+        <% else %>
+          <p class="card-text text-black"><%= link_to 'Add to Cart', add_to_cart_url(@product.id), method: :post %></p>
+        <% end %>
+        <%= link_to 'Buy Now', checkout_create_path, method: :post, params: { id: @product.id }, remote: true %>
       </div>
     </div>
   </div>

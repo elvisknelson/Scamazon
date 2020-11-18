@@ -1,10 +1,28 @@
-<summary>Shopping Cart</summary>
-<ul>
-  <% @cart.each do |product| %>
-    <li>Quantity x <%= product.name %> - <%= number_to_currency((product.price / 100.0)) %> - <%= link_to 'remove from cart', remove_from_cart_url(product), method: :delete %></li>
-  <% end %>
-</ul>
+<div class="justify-content-center mt-3">
+  <div class="col-8 m-auto">
+    <div class="card text-center text-white bg-dark">
+      <h1 class="card-header text-white">Shopping Cart</h1>
+      <div class="card-body">
+        <ul class="navbar-nav">
+          <% @current_orders.each.uniq do |item| %>
+            <li class="cart">
+              <%= item["quantity"] %> x <%= Product.find(item["product_id"]).name %> - <%= number_to_currency((Product.find(item["product_id"]).price / 100.0)) %>
 
-<% unless @cart.empty? %>
-  <%= button_to 'Buy', checkout_create_path, method: :post, remote: true %>
-<% end %>
+              <%= form_with(url:  update_cart_url(1111), local: true, method: "post") do %>
+                <%= text_field_tag(:search_term) %>
+                <%= submit_tag("Update Quantity", class: 'search-button') %>
+              <% end %>
+
+              - <%= button_to 'remove from cart', remove_from_cart_url(item), method: :delete %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <% if @current_orders.empty? %>
+        <h3>Cart is Empty :(</h3>
+      <% else %>
+        <%= button_to 'Buy', checkout_create_path, method: :post, remote: true %>
+      <% end %>
+    </div>
+  </div>
+</div>

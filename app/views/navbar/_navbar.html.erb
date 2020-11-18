@@ -1,6 +1,5 @@
 <nav class="navbar navbar-expand-lg">
-  <a class="navbar-brand" href="#">
-    <img src=<%= image_url('Scamazon_Logo.png')%> height="40" class="d-inline-block align-top" alt=""></a>
+  <img src=<%= image_url('Scamazon_Logo.png')%> height="40" class="d-inline-block align-top" alt="">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -17,10 +16,15 @@
         <%= render partial: 'product/search' %>
       </li>
       <li class="nav-item noline <%= 'active' if current_page?(account_index_path) %>">
-        <%= link_to 'Account', account_index_path, class: "nav-link" %>  <span class="sr-only">(current)</span>
+        <% if session[:user] %>
+          <%= link_to 'Account', account_index_path, class: "nav-link" %>
+        <% else %>
+          <%= link_to 'Login', account_sign_in_path, class: "nav-link" %>
+        <% end %>
+
       </li>
       <li class="nav-item noline <%= 'active' if current_page?(cart_index_path) %>">
-        <%= link_to "Cart (#{@cart.size})", cart_index_path, class: "nav-link" %>
+        <%= link_to "Cart (#{@current_orders.size})", cart_index_path, class: "nav-link" %>
       </li>
       <li class="nav-item noline <%= 'active' if current_page?(about_path) %>">
         <%= link_to 'About', about_path, class: "nav-link" %>

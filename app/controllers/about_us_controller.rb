@@ -4,6 +4,6 @@ class AboutUsController < ApplicationController
   end
 
   def contact
-    @about = About.first
+    @contact = Contact.first
   end
 end

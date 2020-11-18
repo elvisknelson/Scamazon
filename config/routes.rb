@@ -6,21 +6,31 @@ Rails.application.routes.draw do
     get 'success', to: 'checkout#success', as: 'checkout_success'
   end
 
+  scope '/product' do
+    post 'add_to_cart/:id', to: 'product#add_to_cart', as: 'add_to_cart'
+    post 'update_cart/:id', to: 'product#update_cart', as: 'update_cart'
+    delete 'remove_from_cart/:id', to: 'product#remove_from_cart', as: 'remove_from_cart'
+  end
+
   get 'cart/index'
   get 'search/index'
+  get 'account/index'
 
   get 'about', to: 'about_us#index'
-
   get 'contact', to: 'about_us#contact'
-
-  post 'product/add_to_cart/:id', to: 'product#add_to_cart', as: 'add_to_cart'
-  post 'product/update_cart/:id', to: 'product#update_cart', as: 'update_cart'
-  delete 'product/remove_from_cart/:id', to: 'product#remove_from_cart', as: 'remove_from_cart'
 
   get 'category/index'
   resources 'category', only: %i[index show]
 
+  post 'sign_up', to: 'account#sign_up', as: 'account_sign_up'
+  post 'sign_in', to: 'account#sign_in', as: 'account_sign_in'
+  get 'sign_in', to: 'account#sign_in'
+  get 'sign_out', to: 'account#sign_out', as: 'account_sign_out'
+
   root to: 'product#index'
+  get 'sale', to: 'product#sale', as: 'product_sale'
+  get 'rating', to: 'product#rating', as: 'product_rating'
+  get 'new', to: 'product#new', as: 'product_new'
   resources 'product', only: %i[index show]
 
   devise_for :admin_users, ActiveAdmin::Devise.config

@@ -1,9 +1,15 @@
-<div class="row justify-content-center mt-3">
-  <div class="col-8">
-    <div class="card text-white bg-dark">
-      <h1 class="card-header text-white"><%= @about.header %></h1>
+<div class="justify-content-center mt-3">
+  <div class="col-8 m-auto">
+    <div class="card text-center text-white bg-dark">
+      <h1 class="card-header text-white"><%= @contact.header %></h1>
       <div class="card-body">
-        <p class="card-text"><%= @about.content %></p>
+        <h5 class="card-title text-white">Creator: <%= @contact.name %></h5>
+        <p class="card-text"><strong>Email:</strong> <%= @contact.email %></p>
+        <p class="card-text"><strong>Address:</strong> <%= @contact.address %></p>
+        <br>
+        <p class="card-text"><%= @contact.content %></p>
+        <br>
+        <p class="card-footer text-muted"><%= @contact.footer %></p>
       </div>
     </div>
   </div>

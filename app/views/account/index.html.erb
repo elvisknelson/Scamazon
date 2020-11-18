@@ -1,2 +1,15 @@
-<h1>Account#index</h1>
-<p>Find me in app/views/account/index.html.erb</p>
+<div class="justify-content-center mt-3">
+  <div class="col-8 m-auto">
+    <div class="card text-center text-white bg-dark">
+      <h1 class="card-header text-white">Your Account</h1>
+      <div class="card-body">
+
+        <p class="card-text"><strong>Username: </strong><%= @user.username %></p>
+        <p class="card-text"><strong>Password: </strong><%= @user.password %></p>
+        <p class="card-text"><strong>Street Address: </strong><%= @user.street_address %></p>
+
+        <p class="card-footer text-muted"><%= link_to 'Sign Out', account_sign_out_path %></p>
+      </div>
+    </div>
+  </div>
+</div>

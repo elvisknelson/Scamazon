@@ -1,11 +1,14 @@
-<div>
-  <% @categories.each do |category| %>
-    <div class="card-group">
-      <div class="col-sm-3">
-        <div class="card mb-4 bg-light">
-         <p><%= link_to category.name, category_path(category) %></p>
-        </div>
+<div class="row mr-0 ml-0 justify-content-center">
+  <div class="col-6">
+    <h1 class="mb-5 row mr-0 ml-0 justify-content-center">All Categories</h1>
+
+    <div class="card text-white bg-dark">
+      <div class="card-body">
+        <% @categories.each do |category| %>
+          <h3 class="card-text text-white"><%= link_to category.name, category_path(category) %></h3>
+        <% end %>
       </div>
     </div>
-  <% end %>
+
+  </div>
 </div>

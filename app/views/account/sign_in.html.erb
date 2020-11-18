@@ -1,0 +1,19 @@
+<div class="justify-content-center mt-3">
+  <div class="col-8 m-auto">
+    <div class="card text-center text-white bg-dark">
+      <h1 class="card-header text-white">Sign-In</h1>
+      <div class="card-body">
+
+        <%= form_with(url: account_sign_in_path, local: true, action: "sign_in") do %>
+          <div class="login-form">
+            <%= text_field_tag(:user_name) %>
+            <%= text_field_tag(:password) %>
+            <%= submit_tag("Sign In", class: 'search-button') %>
+          </div>
+        <% end %>
+
+        <p class="card-footer text-muted"><%= link_to 'Sign-Up Form', account_sign_up_path, method: "post" %></p>
+      </div>
+    </div>
+  </div>
+</div>

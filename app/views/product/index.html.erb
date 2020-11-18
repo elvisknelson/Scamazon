@@ -1,24 +1,35 @@
+<%= debug @current_order %>
+<%= debug @current_orders %>
+<%= debug session[:user] %>
+<%= debug @test %>
+
 <div>
   <% @categories.each do |category| %>
     <div class="">
-      <h1><%= link_to category.name, category_path(category) %></h1>
+      <h1 class="pl-2"><%= link_to category.name, category_path(category) %></h1>
     </div>
     <div class="card-group">
       <% @products.where(category_id: category.id).each do |product| %>
         <div class="col-sm-3">
           <div class="card mb-4 bg-light">
-            <div class="img-overlay">
-              <%= image_tag('discount.png') %>
-            </div>
+            <% if product.on_sale %>
+              <div class="img-overlay">
+                <%= image_tag('discount.png') %>
+              </div>
+            <% end %>
             <%= link_to image_tag(product.image, height: '250', class: 'card-img'), product_path(product) %>
             <h5 class="card-text pl-2 text-black"><%= number_to_currency((product.price / 100.0)) %></h5>
-            <h6 class="card-text pl-2 linethrough stext-black"><%= number_to_currency((product.price / 100.0) / 0.20) %></h6>
-            <% if @cart.include?(product) %>
-              <p class="card-text pl-2 text-black"><%= link_to 'remove from cart', remove_from_cart_url(product), method: :delete %></p>
-            <% else %>
-              <p class="card-text pl-2 text-black"><%= link_to 'add to cart', add_to_cart_url(product.id), method: :post %></p>
+            <% if product.on_sale %>
+              <h6 class="card-text pl-2 linethrough stext-black"><%= number_to_currency((product.price / 100.0) / 0.20) %></h6>
             <% end %>
-            <%= button_to 'buy now', checkout_create_path, method: :post, params: { id: product.id }, remote: true %>
+            <div class="rating">
+              <% product.rating.to_i.times do %>
+                <%= image_tag("star.JPG", wdith: '25', class: 'star-img') %>
+              <% end %>
+              <% (5 - product.rating.to_i).times do %>
+                <%= image_tag("empty_star.JPG", wdith: '25', class: 'star-img') %>
+              <% end %>
+            </div>
           </div>
         </div>
       <% end %>
