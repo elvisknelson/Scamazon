@@ -4,17 +4,23 @@ class ApplicationController < ActionController::Base
 
   def add_to_cart
     if session[:user]
-      id = params[:id].to_i
-      order_id = @current_order["id"].to_i
+      product_id = params[:id].to_i
 
-      @test = Order.find(order_id)
+      if ProductOrder.exists?(product_id: product_id, order_id: @current_order)
+        order = ProductOrder.where(product_id: product_id, order_id: @current_order).first
+        quantity = order.quantity + 1
+        order.update(quantity: quantity)
+      else
+        ProductOrder.create(product_id: product_id, order_id: @current_order["id"], quantity: 1)
+      end
 
       redirect_to root_path
     end
   end
 
   def update_cart
-
+    ProductOrder.where(product_id: params[:id], order_id: @current_order["id"]).update(quantity: params[:quantity])
+    redirect_to cart_index_path
   end
 
   def remove_from_cart
@@ -25,8 +31,7 @@ class ApplicationController < ActionController::Base
 
   def load_cart
     if session[:user]
-      order = Order.where(user_id: session[:user], status: "pending").first
-      @current_orders = ProductOrder.where(order_id: order["id"])
+      @current_orders = ProductOrder.where(order_id: @current_order)
     end
   end
 
@@ -34,10 +39,12 @@ class ApplicationController < ActionController::Base
     @current_orders ||= []
     session[:user] ||= nil
 
-    if Order.where(user_id: session[:user], status: "pending").empty?
-      @current_order = Order.create(user_id: session[:user], status: "pending")
-    else
-      @current_order = Order.where(user_id: session[:user], status: "pending").first
+    if session[:user]
+      if Order.where(user_id: session[:user], status: "pending").empty?
+        @current_order = Order.create(user_id: session[:user], total_price: 0, pst_paid: 0, gst_paid: 0, hst_paid: 0, status: "pending")
+      else
+        @current_order = Order.where(user_id: session[:user], status: "pending").first
+      end
     end
   end
 end

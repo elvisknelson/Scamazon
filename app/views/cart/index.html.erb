@@ -8,8 +8,8 @@
             <li class="cart">
               <%= item["quantity"] %> x <%= Product.find(item["product_id"]).name %> - <%= number_to_currency((Product.find(item["product_id"]).price / 100.0)) %>
 
-              <%= form_with(url:  update_cart_url(1111), local: true, method: "post") do %>
-                <%= text_field_tag(:search_term) %>
+              <%= form_with(url:  update_cart_url(item["product_id"]), local: true, method: "post") do %>
+                <%= text_field_tag(:quantity) %>
                 <%= submit_tag("Update Quantity", class: 'search-button') %>
               <% end %>
 
@@ -21,7 +21,7 @@
       <% if @current_orders.empty? %>
         <h3>Cart is Empty :(</h3>
       <% else %>
-        <%= button_to 'Buy', checkout_create_path, method: :post, remote: true %>
+        <%= link_to 'Buy', checkout_create_path(0), method: :post, remote: true %>
       <% end %>
     </div>
   </div>

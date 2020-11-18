@@ -1,7 +1,7 @@
 class CheckoutController < ApplicationController
   def create
 
-    if params.has_key?(:id)
+    if params[:id].to_i > 0
       product = Product.find(params[:id])
 
       if product.nil?
@@ -24,9 +24,10 @@ class CheckoutController < ApplicationController
     else
       price = 0
       description = ""
-      @cart.each do |product|
-        price += product.price
-        description += '\'' + product.name + "\'\n"
+      @current_orders.each do |prodorder|
+        item = Product.find(prodorder["product_id"])
+        price += item["price"] * prodorder["quantity"]
+        description += '\'' + item["name"] + "\'\n"
       end
 
       @session = Stripe::Checkout::Session.create(
@@ -51,6 +52,10 @@ class CheckoutController < ApplicationController
   def success
     @session = Stripe::Checkout::Session.retrieve(params[:session_id])
     @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
+    testt = Order.find(@current_order["id"])
+    testt.update(status: "Paid")
+    testt.save
+    @current_orders = []
   end
 
   def cancel;
