@@ -10,8 +10,11 @@ for i in 0..10
 
   for i in 0..10
     name = Faker::Commerce.unique.product_name
-    tes = Product.create(name: name, description: Faker::Company.bs, category_id: cat.id, price: Faker::Number.within(range: 1500..20000),
-                         image: "https://source.unsplash.com/random/800x600/?#{name.split(" ")[2]}", quantity: Faker::Number.within(range: 0..75),
-                         on_sale: Faker::Number.within(range: 0..1), rating: Faker::Number.within(range: 1..5))
+    prod = Product.create(name: name, description: Faker::Company.bs, category_id: cat.id, price: Faker::Number.within(range: 1500..20000),
+                          quantity: Faker::Number.within(range: 0..75), on_sale: Faker::Number.within(range: 0..1),
+                          rating: Faker::Number.within(range: 1..5))
+    downloaded_image = open(URI.open("https://source.unsplash.com/random/800x600/?#{name.split(" ")[2]}"))
+    prod.image.attach(io: downloaded_image, filename: "m-#{name.split(" ")[2]}.jpg")
+    sleep(1)
   end
 end
