@@ -5,6 +5,7 @@ class AccountController < ApplicationController
 
   def index
     @user = User.find(session[:user].to_i)
+    @pastorders = Order.where(user_id: session[:user].to_i, status: "Paid")
   end
 
   def sign_in
