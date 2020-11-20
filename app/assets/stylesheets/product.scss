@@ -2,3 +2,73 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 @import "bootstrap";
+
+.mininav {
+  width: 100%;
+  background-color: #232f3e;
+}
+
+.mininav ul {
+  margin-bottom: 0;
+}
+
+.mininav ul {
+  display: flex;
+}
+
+.mininav ul li {
+  list-style-type: none;
+  margin-right: 15px;
+}
+
+.mininav ul li a {
+  padding: 0;
+  color: white;
+  text-decoration: none;
+}
+
+input {
+  border-radius: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+}
+
+nav.navbar {
+  background-color: #111;
+}
+
+nav.navbar div ul li a {
+  color: white;
+}
+
+.linethrough {
+   text-decoration: line-through;
+}
+
+.img-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: absolute;
+}
+.img-overlay img {
+  width: 5rem;
+}
+
+.rating {
+  display: inline;
+  padding-left: 0.5rem;
+}
+
+.star-img {
+  width: 15px;
+}
+
+form {
+  display: flex;
+}
+
+form .search-button {
+  border-radius: 0 !important;
+}

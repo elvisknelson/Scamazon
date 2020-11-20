@@ -3,8 +3,35 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 
-ul li.cart {
+.cart {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  margin-bottom: -1px;
+  border-top: 1px solid #272e33;
+  border-bottom: 1px solid #272e33;
+}
+
+.cartitem {
+  text-align: left;
+  margin-left: 10px;
+}
+
+.cartitem img {
+  padding: 5px;
+}
+
+.cartprice {
+  text-align: right;
+  font-weight: bold;
+  font-size: 30px;
+  margin-left: auto;
+}
+
+.itemname {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.buynow {
+  margin: auto;
+  padding: 8px 50px;
 }
