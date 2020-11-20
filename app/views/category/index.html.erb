@@ -1,7 +1,7 @@
-<div class="row mr-0 ml-0 justify-content-center pt-4">
-  <div class="col-6">
+<div class="row mr-0 ml-0 justify-content-center pt-3">
+  <div class="col-8">
     <div class="card text-white bg-dark">
-      <h3 class="card-header">Categories</h3>
+      <h1 class="card-header text-white m-auto">Categories</h1>
       <div class="card-body">
         <% @categories.each do |category| %>
           <h3 class="card-text text-white"><%= link_to category.name, category_path(category) %></h3>
