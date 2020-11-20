@@ -3,13 +3,13 @@
     <div class="card text-center text-white bg-dark">
       <h1 class="card-header text-white">Your Account</h1>
       <div class="card-body">
-
         <p class="card-text"><strong>Username: </strong><%= @user.username %></p>
         <p class="card-text"><strong>Street Address: </strong><%= @user.street_address %></p>
         <p class="card-text"><strong>Province: </strong><%= Province.find(@user.province.id).name %></p>
         <p class="card-text"><strong>Country: </strong>Canada</p>
-
         <p class="card-footer text-muted"><%= link_to 'Sign Out', account_sign_out_path %></p>
+
+
       </div>
     </div>
   </div>
