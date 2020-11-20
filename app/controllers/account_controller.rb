@@ -10,13 +10,16 @@ class AccountController < ApplicationController
   def sign_in
     if params[:user_name]
       user = User.where(username: params[:user_name]).first
-      password = BCrypt::Password.new(user.password)
 
-      if (password == params[:password])
-        session[:user] = user.id
-        redirect_to root_path
-      else
-        redirect_to account_sign_in_path
+      unless user.nil?
+        password = BCrypt::Password.new(user.password)
+
+        if (password == params[:password])
+          session[:user] = user.id
+          redirect_to root_path
+        else
+          redirect_to account_sign_in_path
+        end
       end
     end
   end

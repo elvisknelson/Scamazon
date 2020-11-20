@@ -3,9 +3,9 @@ class ApplicationController < ActionController::Base
   before_action :load_cart
 
   def add_to_cart
-    if session[:user]
-      product_id = params[:id].to_i
+    product_id = params[:id].to_i
 
+    if session[:user]
       if ProductOrder.exists?(product_id: product_id, order_id: @current_order)
         order = ProductOrder.where(product_id: product_id, order_id: @current_order).first
         quantity = order.quantity + 1
@@ -13,26 +13,38 @@ class ApplicationController < ActionController::Base
       else
         ProductOrder.create(product_id: product_id, order_id: @current_order["id"], quantity: 1)
       end
-
-      redirect_to root_path
+    else
+      if ProductOrder.exists?(product_id: product_id, order_id: @current_order)
+        order = ProductOrder.where(product_id: product_id, order_id: @current_order).first
+        quantity = order.quantity + 1
+        order.update(quantity: quantity)
+      else
+        ProductOrder.create(product_id: product_id, order_id: @current_order["id"], quantity: 1)
+      end
     end
+
+    redirect_to root_path
   end
 
   def update_cart
-    ProductOrder.where(product_id: params[:id], order_id: @current_order["id"]).update(quantity: params[:quantity])
+    if (params[:quantity].to_i == 0)
+      ProductOrder.where(product_id: params[:id], order_id: @current_order["id"]).first.destroy
+    else
+      ProductOrder.where(product_id: params[:id], order_id: @current_order["id"]).update(quantity: params[:quantity])
+    end
+
     redirect_to cart_index_path
   end
 
   def remove_from_cart
-
+    ProductOrder.where(product_id: params[:id], order_id: @current_order["id"]).first.destroy
+    redirect_to cart_index_path
   end
 
   private
 
   def load_cart
-    if session[:user]
-      @current_orders = ProductOrder.where(order_id: @current_order)
-    end
+    @current_orders = ProductOrder.where(order_id: @current_order)
   end
 
   def initialize_session
@@ -44,6 +56,12 @@ class ApplicationController < ActionController::Base
         @current_order = Order.create(user_id: session[:user], total_price: 0, pst_paid: 0, gst_paid: 0, hst_paid: 0, status: "pending")
       else
         @current_order = Order.where(user_id: session[:user], status: "pending").first
+      end
+    else
+      if Order.where(user_id: -1, status: "pending").empty?
+        @current_order = Order.create(user_id: -1, total_price: 0, pst_paid: 0, gst_paid: 0, hst_paid: 0, status: "pending")
+      else
+        @current_order = Order.where(user_id: -1, status: "pending").first
       end
     end
   end
