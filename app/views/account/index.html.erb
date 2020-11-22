@@ -14,7 +14,7 @@
           <% ProductOrder.where(order_id: order.id).each do |product| %>
             <p class="card-text text-white"><strong>Product Name:</strong> <%= Product.find(product.product_id).name %></p>
           <% end %>
-        <% end %>
+        <% end %> <%# The look of this needs work %>
 
         <p class="card-footer text-muted"><%= link_to 'Sign Out', account_sign_out_path %></p>
       </div>
