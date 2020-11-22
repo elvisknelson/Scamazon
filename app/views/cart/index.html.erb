@@ -12,19 +12,29 @@
                 <div class="cartitem">
                   <p class="itemname"><%= Product.find(item["product_id"]).name %></p>
                   <% if Product.find(item["product_id"]).quantity > 0 %>
-                    <p style="color:aquamarine;">In Stock</p>
+                    <p class="in-stock">In Stock</p>
                   <% else %>
-                    <p style="color:crimson;">Out of Stock</p>
+                    <p class="no-stock">Out of Stock</p>
                   <% end %>
                   <p>Ships from and sold by Scamazon.ca</p>
                   <p><input type="checkbox" style="margin-right:5px !important;">This will be a gift</p>
                   <%= form_with(url:  update_cart_url(item["product_id"]), local: true, method: "post") do %>
                     <%= text_field_tag(:quantity, item["quantity"]) %>
                     <%= submit_tag("Update Quantity", class: 'search-button') %>
+                  <p class="remove-item"><%= link_to 'Remove', remove_from_cart_path(item["product_id"]), method: :delete %></p>
                   <% end %>
                 </div>
-                <div class="cartprice">CDN$ <%= (Product.find(item["product_id"]).price / 100.0) * item["quantity"].to_i %></div>
+                <div class="cartprice">
+                  CDN <%= number_to_currency((Product.find(item["product_id"]).price / 100.0) * item["quantity"].to_i) %>
+                </div>
+                <% @total += (Product.find(item["product_id"]).price / 100.0) * item["quantity"].to_i %>
             </li>
+          <% end %>
+          <% unless @current_orders.empty? %>
+            <div class="cart-total">
+              <p>Tax: <%= number_to_currency(@total * (@user.province.gst + @user.province.pst + @user.province.hst)) %></p>
+              <p>Total: <%= number_to_currency(@total += @total * (@user.province.gst + @user.province.pst + @user.province.hst)) %></p>
+            </div>
           <% end %>
         </ul>
         <% if @current_orders.empty? %>
