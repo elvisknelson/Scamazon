@@ -52,16 +52,16 @@ class ApplicationController < ActionController::Base
     session[:user] ||= nil
 
     if session[:user]
-      if Order.where(user_id: session[:user], status: "pending").empty?
-        @current_order = Order.create(user_id: session[:user], total_price: 0, pst_paid: 0, gst_paid: 0, hst_paid: 0, status: "pending")
+      if Order.where(user_id: session[:user], status: "new").empty?
+        @current_order = Order.create(user_id: session[:user], total_price: 0, pst_paid: 0, gst_paid: 0, hst_paid: 0, status: "new")
       else
-        @current_order = Order.where(user_id: session[:user], status: "pending").first
+        @current_order = Order.where(user_id: session[:user], status: "new").first
       end
     else
-      if Order.where(user_id: -1, status: "pending").empty?
-        @current_order = Order.create(user_id: -1, total_price: 0, pst_paid: 0, gst_paid: 0, hst_paid: 0, status: "pending")
+      if Order.where(user_id: -1, status: "new").empty?
+        @current_order = Order.create(user_id: -1, total_price: 0, pst_paid: 0, gst_paid: 0, hst_paid: 0, status: "new")
       else
-        @current_order = Order.where(user_id: -1, status: "pending").first
+        @current_order = Order.where(user_id: -1, status: "new").first
       end
     end
   end

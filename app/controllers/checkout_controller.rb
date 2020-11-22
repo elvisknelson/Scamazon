@@ -58,6 +58,9 @@ class CheckoutController < ApplicationController
     @current_orders = []
   end
 
+  def guest;
+  end
+
   def cancel;
   end
 end

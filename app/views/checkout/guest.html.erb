@@ -1,0 +1,14 @@
+<div class="justify-content-center mt-3">
+  <div class="col-8 m-auto">
+    <div class="card text-center text-white bg-dark">
+      <h1 class="card-header text-white">Checkout as Guest</h1>
+      <div class="card-body">
+        <div class="login-form">
+          <p>Email </p><%= text_field_tag(:user_name) %>
+          <div class="submitbtn"><%= button_to 'Proceed to Checkout', checkout_create_path(0), method: :post, remote: true %></div>
+        </div>
+        <p class="card-footer text-muted">Checkout as Guest</p>
+      </div>
+    </div>
+  </div>
+</div>

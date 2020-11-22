@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     post 'create/:id', to: 'checkout#create', as: 'checkout_create'
     get 'cancel', to: 'checkout#cancel', as: 'checkout_cancel'
     get 'success', to: 'checkout#success', as: 'checkout_success'
+    get 'guest', to: 'checkout#guest', as: 'checkout_guest'
   end
 
   scope '/product' do
