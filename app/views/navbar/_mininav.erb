@@ -1,19 +1,19 @@
 <div class="mininav">
   <ul>
     <li>
-      <%= link_to 'On Sale', product_sale_path, action: "sale" %>
+      <%= link_to 'On Sale', product_sale_path %>
     </li>
     <li>
-      <%= link_to 'New Products', product_new_path, action: "new" %>
+      <%= link_to 'New Products', product_new_path %>
     </li>
     <li>
-      <%= link_to '3 Stars', product_rating_url(:rating => 3), action: "rating" %>
+      <%= link_to '3 Stars', product_rating_url(:rating => 3) %>
     </li>
      <li>
-      <%= link_to '4 Stars', product_rating_url(:rating => 4), action: "rating" %>
+      <%= link_to '4 Stars', product_rating_url(:rating => 4) %>
     </li>
      <li>
-      <%= link_to '5 Stars', product_rating_url(:rating => 5), action: "rating" %>
+      <%= link_to '5 Stars', product_rating_url(:rating => 5) %>
     </li>
   </ul>
 </div>
