@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_20_040001) do
+ActiveRecord::Schema.define(version: 2020_11_22_213824) do
 
   create_table "about_us", force: :cascade do |t|
     t.string "header"
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 2020_11_20_040001) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "status"
     t.decimal "hst_paid"
+    t.string "stripe_id"
   end
 
   create_table "product_orders", force: :cascade do |t|
