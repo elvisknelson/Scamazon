@@ -9,11 +9,11 @@
           <div class="card mb-4 bg-light">
             <% if product.on_sale %>
               <div class="img-overlay">
-                <%= image_tag('discount.png') %>
+                <%= image_tag('discount.png', alt: 'discount image') %>
               </div>
             <% end %>
             <% if product.image.present?%>
-              <%= link_to image_tag(product.image, height: '250', class: 'card-img'), product_path(product) %>
+              <%= link_to image_tag(product.image, class: 'card-img', alt: 'Image'), product_path(product) %>
             <% end %>
             <h5 class="card-text pl-2 text-black"><%= number_to_currency((product.price / 100.0)) %></h5>
             <% if product.on_sale %>
@@ -21,10 +21,10 @@
             <% end %>
             <div class="rating">
               <% product.rating.to_i.times do %>
-                <%= image_tag("star.JPG", wdith: '25', class: 'star-img') %>
+                <%= image_tag("star.JPG", class: 'star-img', alt: 'star image') %>
               <% end %>
               <% (5 - product.rating.to_i).times do %>
-                <%= image_tag("empty_star.JPG", wdith: '25', class: 'star-img') %>
+                <%= image_tag("empty_star.JPG", class: 'star-img', alt: 'star image') %>
               <% end %>
             </div>
           </div>

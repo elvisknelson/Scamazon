@@ -6,12 +6,12 @@
 
         <%= form_with(url: account_sign_up_path, local: true, method: "post", action: "sign_up") do %>
           <div class="login-form">
-            <p>Username: <%= text_field_tag(:user_name) %></p>
-            <p>Address: <%= text_field_tag(:address) %></p>
-            <p>Province: <%= select_tag "province", options_from_collection_for_select(Province.all, "id", "name") %></p>
-            <p>Password: <%= password_field_tag(:password_1) %></p>
-            <p>Confirm Password: <%= password_field_tag(:password_2) %></p>
-            <%= submit_tag("Create User", class: 'search-button') %>
+            <p>Email </p><%= text_field_tag(:user_name) %>
+            <p>Address </p><%= text_field_tag(:address) %>
+            <p>Province </p><%= select_tag "province", options_from_collection_for_select(Province.all, "id", "name") %>
+            <p>Password </p><%= password_field_tag(:password_1) %>
+            <p>Confirm Password </p><%= password_field_tag(:password_2) %>
+            <div class="submitbtn"><%= submit_tag("Create User", class: 'search-button') %></div>
           </div>
         <% end %>
 

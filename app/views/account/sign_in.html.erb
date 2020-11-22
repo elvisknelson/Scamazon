@@ -6,9 +6,9 @@
 
         <%= form_with(url: account_sign_in_path, local: true, action: "sign_in") do %>
           <div class="login-form">
-            <p>Username: <%= text_field_tag(:user_name) %></p>
-            <p>Password: <%= password_field_tag(:password) %></p>
-            <%= submit_tag("Sign In", class: 'search-button') %>
+            <p>Email </p><%= text_field_tag(:user_name) %>
+            <p>Password </p><%= password_field_tag(:password) %>
+            <div class="submitbtn"><%= submit_tag("Sign In", class: 'search-button') %></div>
           </div>
         <% end %>
 
