@@ -72,3 +72,20 @@ form {
 form .search-button {
   border-radius: 0 !important;
 }
+
+.product-show {
+  display: flex;
+}
+
+.product-show-content {
+  margin-left: 15px;
+}
+
+.product-show-content a {
+  color: #ff9a1d;
+}
+
+.product-show-image img {
+  width: 150px;
+  height: 150px;
+}
