@@ -26,7 +26,7 @@ class AccountController < ApplicationController
   end
 
   def sign_up
-    if params[:user_name]
+    if params[:user_name].present? && params[:province].present? && params[:address].present? && params[:password_1].present?
       if (params[:password_1] == params[:password_2])
         unless User.exists?(username: params[:user_name])
           password = BCrypt::Password.create(params[:password_1])
@@ -37,7 +37,7 @@ class AccountController < ApplicationController
           redirect_to account_sign_in_path
         end
       else
-        redirect_to account_index_path
+        redirect_to account_sign_up_path
       end
     end
   end
