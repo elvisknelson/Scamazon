@@ -12,7 +12,7 @@
                 <div class="cartitem">
                   <p class="itemname"><%= Product.find(item["product_id"]).name %></p>
                   <% if Product.find(item["product_id"]).quantity > 0 %>
-                    <p class="in-stock">In Stock</p>
+                    <p class="in-stock">In Stock x (<%= Product.find(item["product_id"]).quantity %>)</p>
                   <% else %>
                     <p class="no-stock">Out of Stock</p>
                   <% end %>
