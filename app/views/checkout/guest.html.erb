@@ -4,8 +4,14 @@
       <h1 class="card-header text-white">Checkout as Guest</h1>
       <div class="card-body">
         <div class="login-form">
-          <p>Email </p><%= text_field_tag(:user_name) %>
-          <div class="submitbtn"><%= button_to 'Proceed to Checkout', checkout_create_path(0), method: :post, remote: true %></div>
+          <%= form_with(url: checkout_create_path(0), method: :post, remote: true) do %>
+          <div class="login-form">
+            <p>Email </p><%= text_field_tag(:user_name) %>
+            <p>Street Address </p><%= text_field_tag(:address) %>
+            <p>Province </p><%= select_tag "province", options_from_collection_for_select(Province.all, "id", "name") %>
+            <div class="submitbtn"><%= submit_tag("Proceed to Checkout", class: 'search-button') %></div>
+          </div>
+        <% end %>
         </div>
         <p class="card-footer text-muted">Checkout as Guest</p>
       </div>
