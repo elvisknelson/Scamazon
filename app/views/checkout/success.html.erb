@@ -1,1 +1,24 @@
-<h1>Success</h1>
+<div class="justify-content-center mt-3">
+  <div class="col-8 m-auto">
+    <div class="card text-center text-white bg-dark">
+      <h1 class="card-header text-white">Order Successfully Placed</h1>
+      <div class="card-body">
+        <h3>Order Details</h3>
+        <ul>
+          <% ProductOrder.where(order_id: @previous_order.id).each do |order| %>
+            <li class="order">
+              <div class="order-image"><%= image_tag( Product.find(order["product_id"]).image) %></div>
+              <div class="order-content">
+                <p class="card-text">Product Name: <%= Product.find(order["product_id"]).name %></p>
+                <p class="card-text">Description: <%= Product.find(order["product_id"]).description %></p>
+                <p class="card-text">Quantity: <%= order["quantity"] %></p>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+        <p class="card-text total">Order Total: <%= number_to_currency(Order.find(@previous_order.id).total_price / 100) %></p>
+        <p class="card-footer text-muted">Confirmation Code: <%= Order.find(@previous_order.id).stripe_id %></p>
+      </div>
+    </div>
+  </div>
+</div>

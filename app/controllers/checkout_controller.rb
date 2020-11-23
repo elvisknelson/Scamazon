@@ -57,7 +57,7 @@ class CheckoutController < ApplicationController
   end
 
   def success
-    unless @current_orders.nil?
+    if @current_orders.any?
       @session = Stripe::Checkout::Session.retrieve(params[:session_id])
       @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
 
@@ -72,9 +72,8 @@ class CheckoutController < ApplicationController
       order.update(status: "Paid", total_price: price, gst_paid: user.province.gst, pst_paid: user.province.pst, hst_paid: user.province.hst, stripe_id: @session["id"])
       order.save
 
-      @previous_order = @current_order
+      @previous_order = Order.find(@current_order["id"])
       @current_orders = []
-      @current_order = nil
     end
   end
 

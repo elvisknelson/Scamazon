@@ -8,13 +8,22 @@
         <p class="card-text"><strong>Province: </strong><%= Province.find(@user.province.id).name %></p>
         <p class="card-text"><strong>Country: </strong>Canada</p>
 
-        <% @pastorders.each do |order| %>
-          <h3 class="card-text text-white"><strong>Order Id:</strong> <%= order.id %></h3>
-          <p class="card-text text-white"><strong>Total Price:</strong> $<%= order.total_price / 100.00 %></p>
-          <% ProductOrder.where(order_id: order.id).each do |product| %>
-            <p class="card-text text-white"><strong>Product Name:</strong> <%= Product.find(product.product_id).name %></p>
+        <h2 class="mt-4">Past Orders</h2>
+        <ul>
+          <% @pastorders.each do |order| %>
+            <li class="past-order">
+              <h4 class="card-text text-white order-id"><strong>Order Id: </strong></h4><p class="order-id">(<%= order.stripe_id %>)</p>
+              <strong>Products</strong>
+              <ul>
+                <% ProductOrder.where(order_id: order.id).each do |product| %>
+                <li><p class="card-text past-order-item"><%= link_to Product.find(product.product_id).name, product_path(Product.find(product.product_id)) %></p></li>
+                <% end %>
+              </ul>
+              <p class="card-text text-white"><strong>Taxs:</strong> <%= number_to_currency((order.total_price * (order.gst_paid + order.hst_paid + order.pst_paid)) / 100) %></p>
+              <p class="card-text text-white"><strong>Total:</strong> <%= number_to_currency(order.total_price / 100.00) %></p>
+            </li>
           <% end %>
-        <% end %> <%# The look of this needs work %>
+        </ul>
 
         <p class="card-footer text-muted"><%= link_to 'Sign Out', account_sign_out_path %></p>
       </div>
