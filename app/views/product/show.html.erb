@@ -11,7 +11,12 @@
             <p class="card-text"><strong>Pice:</strong> <%= number_to_currency(@product.price / 100.0) %></p>
             <p class="card-text"><strong>Quantity:</strong> <%= @product.quantity %></p>
             <p class="card-text text-black"><%= button_to 'Add to Cart', add_to_cart_url(@product.id), method: :post %></p>
-            <%= button_to 'Buy Now', checkout_create_path, method: :post, params: { id: @product.id }, remote: true %>
+
+            <% if session[:user] %>
+              <%= button_to 'Buy Now', checkout_create_path, method: :post, params: { id: @product.id }, remote: true %>
+            <% else %>
+              <%= button_to 'Buy Now', checkout_guest_path, method: :post, params: { id: @product.id } %>
+            <% end %>
           </div>
         </div>
       </div>

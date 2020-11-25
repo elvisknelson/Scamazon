@@ -43,7 +43,7 @@
           <% if session[:user] %>
             <div class="buynow"><%= button_to 'Proceed to Checkout', checkout_create_path(0), method: :post, remote: true %></div>
           <% else %>
-            <div class="buynow"><%= button_to 'Checkout as Guest', checkout_guest_path, method: :get %></div>
+            <div class="buynow"><%= button_to 'Checkout as Guest', guest_path, method: :get %></div>
           <% end %>
         <% end %>
       </div>

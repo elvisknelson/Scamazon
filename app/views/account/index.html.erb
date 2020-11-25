@@ -16,10 +16,10 @@
               <strong>Products</strong>
               <ul>
                 <% ProductOrder.where(order_id: order.id).each do |product| %>
-                <li><p class="card-text past-order-item"><%= link_to Product.find(product.product_id).name, product_path(Product.find(product.product_id)) %></p></li>
+                <li><p class="card-text past-order-item"><%= product.quantity%> x <%= link_to Product.find(product.product_id).name, product_path(Product.find(product.product_id)) %> : <%= number_to_currency(Product.find(product.product_id).price / 100.0) %></p></li>
                 <% end %>
               </ul>
-              <p class="card-text text-white"><strong>Taxs:</strong> <%= number_to_currency((order.total_price * (order.gst_paid + order.hst_paid + order.pst_paid)) / 100) %></p>
+              <p class="card-text text-white"><strong>Taxes:</strong> <%= number_to_currency((order.total_price * (order.gst_paid + order.hst_paid + order.pst_paid)) / 100) %></p>
               <p class="card-text text-white"><strong>Total:</strong> <%= number_to_currency(order.total_price / 100.00) %></p>
             </li>
           <% end %>

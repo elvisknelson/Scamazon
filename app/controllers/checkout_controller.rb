@@ -1,6 +1,12 @@
 class CheckoutController < ApplicationController
   def create
 
+    unless params[:province].nil?
+      prov = Province.find(params[:province])
+    else
+      prov = User.find(session[:user]).province
+    end
+
     if params[:id].to_i > 0
       product = Product.find(params[:id])
 
@@ -23,12 +29,6 @@ class CheckoutController < ApplicationController
       )
     else
 
-      unless params[:province].nil?
-        prov = Province.find(params[:province])
-      else
-        prov = User.find(session[:user]).province
-      end
-
       price = 0
       description = ""
       @current_orders.each do |prodorder|
@@ -46,7 +46,7 @@ class CheckoutController < ApplicationController
           currency: 'cad',
           quantity: 1
         }],
-        success_url: checkout_success_url + '?session_id={CHECKOUT_SESSION_ID}',
+        success_url: checkout_success_url + '?session_id={CHECKOUT_SESSION_ID}&province=' + prov.id.to_s,
         cancel_url: checkout_cancel_url
       )
     end
@@ -62,14 +62,14 @@ class CheckoutController < ApplicationController
       @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
 
       order = Order.find(@current_order["id"])
-      user = User.find(session[:user]) #TODO FIX THIS
       price = 0.00
       @current_orders.each do |prodorder|
         item = Product.find(prodorder["product_id"])
         price += item["price"] * prodorder["quantity"]
       end
-      price += price * (user.province.pst + user.province.gst + user.province.hst)
-      order.update(status: "Paid", total_price: price, gst_paid: user.province.gst, pst_paid: user.province.pst, hst_paid: user.province.hst, stripe_id: @session["id"])
+      prov = Province.find(params[:province].to_i)
+      price += price * (prov.pst + prov.gst + prov.hst)
+      order.update(status: "Paid", total_price: price, gst_paid: prov.gst, pst_paid: prov.pst, hst_paid: prov.hst, stripe_id: @session["id"])
       order.save
 
       @previous_order = Order.find(@current_order["id"])
@@ -77,7 +77,10 @@ class CheckoutController < ApplicationController
     end
   end
 
-  def guest;
+  def guest
+    if params[:id]
+      ProductOrder.create(product_id: params[:id], order_id: @current_order["id"], quantity: 1)
+    end
   end
 
   def cancel;
